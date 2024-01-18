@@ -1,0 +1,28 @@
+﻿[
+  {
+    "Exception": {
+      "ClassName": "System.Xml.XmlException",
+      "Message": "Name cannot begin with the ' ' character, hexadecimal value 0x20. Line 1, position 16.",
+      "Data": null,
+      "InnerException": null,
+      "HelpURL": null,
+      "StackTraceString": "   at System.Xml.XmlTextReaderImpl.Throw(Exception e)\n   at System.Xml.XmlTextReaderImpl.Throw(String res, String[] args)\n   at System.Xml.XmlTextReaderImpl.ParseQName(Boolean isQName, Int32 startOffset, Int32& colonPos)\n   at System.Xml.XmlTextReaderImpl.ParseElement()\n   at System.Xml.XmlTextReaderImpl.ParseElementContent()\n   at System.Xml.Linq.XContainer.ReadContentFrom(XmlReader r)\n   at System.Xml.Linq.XDocument.Load(XmlReader reader, LoadOptions options)\n   at System.Xml.Linq.XDocument.Parse(String text, LoadOptions options)\n   at AppServices.ReportService.ExtractXmlTags(String xmlTemplate, String[] excluded) in C:\\source\\repos\\CodingChallenge\\CodingChallenge\\Report.AppServices\\ReportService.cs:line 88\n   at AppServices.ReportService.ValidateTemplate[T](String xmlTemplate) in C:\\source\\repos\\CodingChallenge\\CodingChallenge\\Report.AppServices\\ReportService.cs:line 62",
+      "RemoteStackTraceString": null,
+      "RemoteStackIndex": 0,
+      "ExceptionMethod": null,
+      "HResult": -2146232000,
+      "Source": "System.Private.Xml",
+      "WatsonBuckets": null,
+      "res": "Name cannot begin with the '{0}' character, hexadecimal value {1}.",
+      "args": [
+        " ",
+        "0x20"
+      ],
+      "lineNumber": 1,
+      "linePosition": 16,
+      "sourceUri": "",
+      "version": "2.0"
+    },
+    "Message": "Generic exception."
+  }
+]
