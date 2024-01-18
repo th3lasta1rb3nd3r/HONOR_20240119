@@ -55,7 +55,7 @@ public class ReportService : IReportService
             sbResult.AppendLine(task.Item2);
         }
         
-        return sbResult.ToString();
+        return sbResult.ToString().Trim();
     }
 
     private static Task<(int, string)> ReplaceXmlTagsWithValues(int pageIndex, ReportModel[] items, string xmlTemplate, PropertyInfo[] properties)
