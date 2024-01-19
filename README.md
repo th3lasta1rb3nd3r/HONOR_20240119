@@ -24,5 +24,5 @@
 #steps to test the API / generation of report
 1. please open "files" folder on the same directory
 2. upload reports.json and template.txt to the swagger UI
-    2.1 a success response is expected and file can be downloaded with "reports.txt" as a filename.
-3. the for testing, you can upload any files.
+3. a success response is expected and file can be downloaded with "reports.txt" as a filename.
+4. the for testing, you can upload any files.
