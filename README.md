@@ -2,6 +2,11 @@
 
 #steps to debug this app via a docker.
 
+1. Pre-requisites
+    * Visual Studio 2022
+    * .Net Core 7.0 or higher must be installed
+    * Docker Desktop
+
 1. Please download a docker (if not installed yet) from this url: https://www.docker.com/products/docker-desktop/
 2. Run it as administrator.
 3. Open Visual studio (as a admin) and select "Report.WebApi" project as startup.
