@@ -67,14 +67,14 @@ public class ReportService : IReportService
         return sbResult.ToString().Trim();
     }
 
-    public List<ErrorMessage> ValidateTemplate<T>(string xmlTemplate)
+    public List<ErrorMessage> ValidateReportTemplate(string xmlTemplate)
     {
         var result = new List<ErrorMessage>();
         try
         {
             var xmlTagNames = ExtractXmlTags(xmlTemplate, _exludedXmlTags);
 
-            var properties = typeof(T).GetProperties()
+            var properties = typeof(ReportModel).GetProperties()
                         .Select(prop => prop.Name).ToArray();
 
             var invalidTagNames = xmlTagNames
