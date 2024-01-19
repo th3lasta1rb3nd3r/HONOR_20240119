@@ -11,9 +11,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Report.AppServices.Tests", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Report.Models", "Report.Models\Report.Models.csproj", "{1644D350-469C-42AF-9F19-95014C3B4623}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Report.WebApi", "Report.WebApi\Report.WebApi.csproj", "{6ED22F27-7E49-401F-A352-B86EA6CDA030}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Report.WebApi", "Report.WebApi\Report.WebApi.csproj", "{6ED22F27-7E49-401F-A352-B86EA6CDA030}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Report.WebApi.Tests", "Report.WebApi.Tests\Report.WebApi.Tests.csproj", "{E6D3CF07-4D50-41C4-9F6B-3918F792B386}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Report.WebApi.Tests", "Report.WebApi.Tests\Report.WebApi.Tests.csproj", "{E6D3CF07-4D50-41C4-9F6B-3918F792B386}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A84A3101-DD7B-479D-A6E3-584275CD481C}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
