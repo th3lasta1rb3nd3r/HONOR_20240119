@@ -2,7 +2,7 @@ using AppServices;
 using AppServices.Interfaces;
 using FizzWare.NBuilder;
 using Newtonsoft.Json;
-using Reporting.Models;
+using Report.Models;
 using Snapshooter.Xunit;
 using System;
 

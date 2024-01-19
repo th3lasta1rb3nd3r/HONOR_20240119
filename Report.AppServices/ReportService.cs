@@ -1,6 +1,6 @@
 ﻿using AppServices.Interfaces;
-using Reporting.Models;
-using Reporting.Models.Errors;
+using Report.Models;
+using Report.Models.Errors;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;

@@ -1,4 +1,4 @@
-﻿namespace Reporting.Models.Errors;
+﻿namespace Report.Models.Errors;
 
 public class NotFoundTemplateFieldError : ErrorMessage
 {

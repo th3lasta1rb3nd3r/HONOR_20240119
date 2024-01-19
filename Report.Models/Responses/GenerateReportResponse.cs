@@ -1,4 +1,4 @@
-﻿namespace Reporting.Models.Responses;
+﻿namespace Report.Models.Responses;
 
 public class GenerateReportResponse : BaseResponse
 {

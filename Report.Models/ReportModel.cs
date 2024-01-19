@@ -1,4 +1,4 @@
-﻿namespace Reporting.Models;
+﻿namespace Report.Models;
 
 public class ReportModel
 {

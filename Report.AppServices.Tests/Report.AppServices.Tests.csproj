@@ -27,7 +27,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Report.AppServices.Interfaces\Report.AppServices.Interfaces.csproj" />
     <ProjectReference Include="..\Report.AppServices\Report.AppServices.csproj" />
-    <ProjectReference Include="..\Reporting.Models\Reporting.Models.csproj" />
+    <ProjectReference Include="..\Report.Models\Report.Models.csproj" />
   </ItemGroup>
 
   <ItemGroup>

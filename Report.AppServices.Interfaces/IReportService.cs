@@ -1,4 +1,4 @@
-﻿using Reporting.Models.Errors;
+﻿using Report.Models.Errors;
 
 namespace AppServices.Interfaces;
 
