@@ -1,6 +1,4 @@
-﻿using Reporting.Models;
-using Reporting.Models.Errors;
-using Reporting.Models.Responses;
+﻿using Reporting.Models.Errors;
 
 namespace AppServices.Interfaces;
 

@@ -10,12 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="__snapshots__\__mismatch__\**" />
-    <EmbeddedResource Remove="__snapshots__\__mismatch__\**" />
-    <None Remove="__snapshots__\__mismatch__\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageReference Include="NBuilder" Version="6.1.0" />
     <PackageReference Include="Snapshooter.Xunit" Version="0.14.1" />
@@ -34,6 +28,10 @@
     <ProjectReference Include="..\Report.AppServices.Interfaces\Report.AppServices.Interfaces.csproj" />
     <ProjectReference Include="..\Report.AppServices\Report.AppServices.csproj" />
     <ProjectReference Include="..\Reporting.Models\Reporting.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="__snapshots__\" />
   </ItemGroup>
 
 </Project>

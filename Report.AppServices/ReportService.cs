@@ -21,7 +21,7 @@ public class ReportService : IReportService
             return string.Empty;
         }
 
-        //reformatted xml template
+        //reformat xml template
         xmlTemplate = XDocument.Parse(xmlTemplate).ToString(SaveOptions.DisableFormatting);
         xmlTemplate = xmlTemplate.ToLowerInvariant();
 
@@ -29,13 +29,15 @@ public class ReportService : IReportService
         var xmlTagNames = ExtractXmlTags(xmlTemplate, _exludedXmlTags);
         foreach (var e in _exludedXmlTags)
         {
-            xmlTemplate = xmlTemplate.Replace($"<{e}>", string.Empty).Replace($"</{e}>", string.Empty);
+            xmlTemplate = xmlTemplate
+                                .Replace($"<{e}>", string.Empty, StringComparison.OrdinalIgnoreCase)
+                                .Replace($"</{e}>", string.Empty, StringComparison.OrdinalIgnoreCase);
         }
 
-        //get properties that match with xml tags
+        //get properties that matches with selected xml tags only
         var properties = typeof(ReportModel).GetProperties()
-                    .Where(p => Array.Exists(xmlTagNames, e => string.Equals(e, p.Name,
-                        StringComparison.OrdinalIgnoreCase)))
+                    .Where(p =>
+                        Array.Exists(xmlTagNames, e => string.Equals(e, p.Name, StringComparison.OrdinalIgnoreCase)))
                     .ToArray();
 
         //leverage by number of tasks to make the process faster
@@ -44,36 +46,25 @@ public class ReportService : IReportService
         for (int pageIndex = 0; pageIndex <= (reportModels.Length / pageSize); pageIndex++)
         {
             var items = reportModels.Skip(pageIndex * pageSize).Take(pageSize).ToArray();
+            if (items.Length == 0) { continue; }
+
             tasks.Add(ReplaceXmlTagsWithValues(pageIndex, items, xmlTemplate, properties));
         }
 
+        //wait all tasks to be done
         var doneTasks = await Task.WhenAll(tasks);
 
+        //combine all tasks and their results into one string
         StringBuilder sbResult = new();
         foreach (var task in doneTasks.OrderBy(e => e.Item1))
         {
             sbResult.AppendLine(task.Item2);
         }
-        
+
+        //free tasks
+        tasks.Clear();
+
         return sbResult.ToString().Trim();
-    }
-
-    private static Task<(int, string)> ReplaceXmlTagsWithValues(int pageIndex, ReportModel[] items, string xmlTemplate, PropertyInfo[] properties)
-    {
-        StringBuilder sbResult = new();
-        foreach (var report in items)
-        {
-            string template = xmlTemplate;
-            foreach (var p in properties)
-            {
-                var value = p.GetValue(report, null)?.ToString() ?? string.Empty;
-                template = template.Replace($"<{p.Name.ToLowerInvariant()} />", value);
-            }
-
-            sbResult.AppendLine(template);
-        }
-
-        return Task.FromResult<(int, string)>(new(pageIndex, sbResult.ToString()));
     }
 
     public List<ErrorMessage> ValidateTemplate<T>(string xmlTemplate)
@@ -86,11 +77,9 @@ public class ReportService : IReportService
             var properties = typeof(T).GetProperties()
                         .Select(prop => prop.Name).ToArray();
 
-#pragma warning disable S6605 // Collection-specific "Exists" method should be used instead of the "Any" extension
             var invalidTagNames = xmlTagNames
-                                .Where(e => !properties.Any(p => string.Equals(p, e, StringComparison.OrdinalIgnoreCase)))
+                                .Where(e => !Array.Exists(properties, p => string.Equals(p, e, StringComparison.OrdinalIgnoreCase)))
                                 .ToArray();
-#pragma warning restore S6605 // Collection-specific "Exists" method should be used instead of the "Any" extension
 
             foreach (var invalidTag in invalidTagNames)
             {
@@ -105,7 +94,7 @@ public class ReportService : IReportService
         return result;
     }
 
-    static string[] ExtractXmlTags(string xmlTemplate, string[] excluded)
+    private static string[] ExtractXmlTags(string xmlTemplate, string[] excluded)
     {
         var tagNames = XDocument.Parse(xmlTemplate)
             .Descendants()
@@ -115,5 +104,24 @@ public class ReportService : IReportService
             .ToArray();
 
         return tagNames;
+    }
+
+    private static Task<(int, string)> ReplaceXmlTagsWithValues(int pageIndex, ReportModel[] items, string xmlTemplate, PropertyInfo[] properties)
+    {
+        StringBuilder sbResult = new();
+        foreach (var item in items)
+        {
+            string template = xmlTemplate;
+            foreach (var p in properties)
+            {
+                var value = p.GetValue(item, null)?.ToString() ?? string.Empty;
+                template = template
+                            .Replace($"<{p.Name.ToLowerInvariant()} />", value, StringComparison.OrdinalIgnoreCase);
+            }
+
+            sbResult.AppendLine(template);
+        }
+
+        return Task.FromResult<(int, string)>(new(pageIndex, sbResult.ToString()));
     }
 }
