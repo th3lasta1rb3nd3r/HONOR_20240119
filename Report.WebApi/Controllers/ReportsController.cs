@@ -99,7 +99,7 @@ namespace Report.WebApi.Controllers
         }
 
         /// <summary>
-        /// get file by extension & content type
+        /// get file by extension and content type
         /// </summary>
         /// <param name="files"></param>
         /// <param name="extension"></param>
