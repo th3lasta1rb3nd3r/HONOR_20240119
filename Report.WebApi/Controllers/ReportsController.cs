@@ -19,6 +19,11 @@ namespace Report.WebApi.Controllers
             _reportService = reportService;
         }
 
+        /// <summary>
+        /// generate reports
+        /// </summary>
+        /// <param name="files">a json file and tempalte (xml format) are required</param>
+        /// <returns>file text</returns>
         [HttpPost(nameof(GenerateReport))]
         public async Task<IActionResult> GenerateReport(List<IFormFile> files)
         {
@@ -50,6 +55,12 @@ namespace Report.WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// validate and get content of a json file
+        /// </summary>
+        /// <param name="files"></param>
+        /// <param name="errorMessages"></param>
+        /// <returns></returns>
         private static async Task<string> ValidateAndGetJsonContent(List<IFormFile> files, List<ErrorMessage> errorMessages)
         {
             var jsonFile = GetFileByExtensionAndContentType(files, ".json", "application/json");
@@ -62,6 +73,12 @@ namespace Report.WebApi.Controllers
             return await GetContent(jsonFile);
         }
 
+        /// <summary>
+        /// validate and get template content
+        /// </summary>
+        /// <param name="files"></param>
+        /// <param name="errorMessages"></param>
+        /// <returns></returns>
         private async Task<string> ValidateAndGetTemplateContent(List<IFormFile> files, List<ErrorMessage> errorMessages)
         {
             var templateFile = GetFileByExtensionAndContentType(files, ".txt", "text/plain");
@@ -81,6 +98,13 @@ namespace Report.WebApi.Controllers
             return templateContent;
         }
 
+        /// <summary>
+        /// get file by extension & content type
+        /// </summary>
+        /// <param name="files"></param>
+        /// <param name="extension"></param>
+        /// <param name="contentType"></param>
+        /// <returns></returns>
         private static IFormFile? GetFileByExtensionAndContentType(List<IFormFile> files, string extension, string contentType)
         {
             return files.SingleOrDefault(e =>

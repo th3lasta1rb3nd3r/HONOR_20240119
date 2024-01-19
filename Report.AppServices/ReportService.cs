@@ -12,6 +12,12 @@ public class ReportService : IReportService
 {
     readonly string[] _exludedXmlTags = new[] { "template-row" };
 
+    /// <summary>
+    /// generate reports based on template provided from a json datasource
+    /// </summary>
+    /// <param name="json"></param>
+    /// <param name="xmlTemplate"></param>
+    /// <returns></returns>
     public async Task<string> GenerateReport(string json, string xmlTemplate)
     {
         //convert obj to string, and return if empty
@@ -40,7 +46,7 @@ public class ReportService : IReportService
                         Array.Exists(xmlTagNames, e => string.Equals(e, p.Name, StringComparison.OrdinalIgnoreCase)))
                     .ToArray();
 
-        //leverage by number of tasks to make the process faster
+        //leverage process by dividing number of tasks to make the it faster
         var tasks = new List<Task<(int, string)>>();
         int pageSize = 5000;
         for (int pageIndex = 0; pageIndex <= (reportModels.Length / pageSize); pageIndex++)
@@ -94,6 +100,12 @@ public class ReportService : IReportService
         return result;
     }
 
+    /// <summary>
+    /// extract unique xml tags/elements
+    /// </summary>
+    /// <param name="xmlTemplate"></param>
+    /// <param name="excluded"></param>
+    /// <returns></returns>
     private static string[] ExtractXmlTags(string xmlTemplate, string[] excluded)
     {
         var tagNames = XDocument.Parse(xmlTemplate)
